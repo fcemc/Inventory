@@ -178,16 +178,22 @@ function getMember(mbrsep) {
                 $("#spinCont").show();
             },
             success: function (result) {
-                var results = result.MEMBERLISTResult;
-                
-                var string = "NAME: " + results[0].NAME + "\n" +
-                    "MEMBERNO: " + results[0].MEMBERNO + "\n" +
-                    "MEMBERSEP: " + results[0].MEMBERSEP + "\n" +
-                    "BILLADDR: " + results[0].BILLADDR + "\n" +
-                    "SERVADDR: " + results[0].SERVADDR + "\n" +
-                    "PHONE: " + results[0].PHONE + "\n" +
-                     "MAPNUMBER: " + results[0].MAPNUMBER;
 
+                var results = result.MEMBERLISTResult;
+                var string = "";
+
+                if (results.length > 0) {                    
+                    string = "NAME: " + results[0].NAME + "\n" +
+                        "MEMBERNO: " + results[0].MEMBERNO + "\n" +
+                        "MEMBERSEP: " + results[0].MEMBERSEP + "\n" +
+                        "BILLADDR: " + results[0].BILLADDR + "\n" +
+                        "SERVADDR: " + results[0].SERVADDR + "\n" +
+                        "PHONE: " + results[0].PHONE + "\n" +
+                         "MAPNUMBER: " + results[0].MAPNUMBER;
+                }
+                else {
+                    string = mbrsep;
+                }
                 $("#scanText").text(string);
                 $("#spinCont").hide();
             },
