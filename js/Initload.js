@@ -1,8 +1,11 @@
 ﻿var tryingToReconnect = false, user;
 
 $(document).ready(function () {
-    if (localStorage.fcemcInventory_scanning == false) {
+    if (localStorage.fcemcInventory_scanning == undefined || localStorage.fcemcInventory_scanning == false) {
         $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+    }
+    else {
+        $.mobile.pageContainer.pagecontainer("change", "#page1");
     }
 
     //adjust for status bar in iOS
@@ -140,13 +143,13 @@ function scan() {
           //      "Format: " + result.format + "\n" +
           //      "Cancelled: " + result.cancelled);
 
-          $("#scanText").html("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+          $("#scanText").text("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
 
           localStorage.setItem("fcemcInventory_scanning", false);
       },
       function (error) {
           //alert("Scanning failed: " + error);
-          $("#scanText").html("Scanning failed: " + error);
+          $("#scanText").text("Scanning failed: " + error);
           localStorage.setItem("fcemcInventory_scanning", false);
       },
       {
