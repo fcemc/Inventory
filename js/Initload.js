@@ -1,7 +1,9 @@
-﻿var tryingToReconnect = false, user;
+﻿var tryingToReconnect = false, user, notScanning = true;
 
 $(document).ready(function () {
-    $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+    if (notScanning) {
+        $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+    }
 
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
@@ -130,6 +132,7 @@ function initLoad() {
 }
 
 function scan() {
+    notScanning = false;
     cordova.plugins.barcodeScanner.scan(
       function (result) {
           //alert("We got a barcode\n" +
@@ -139,10 +142,12 @@ function scan() {
 
           $("#scanText").html("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
 
+          notScanning = true;
       },
       function (error) {
           //alert("Scanning failed: " + error);
           $("#scanText").html("Scanning failed: " + error);
+          notScanning = true;
       },
       {
           "preferFrontCamera": false, // iOS and Android
