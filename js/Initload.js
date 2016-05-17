@@ -135,6 +135,10 @@ function initLoad() {
 }
 
 function scan() {
+
+    //getMember("71547");
+
+
     localStorage.setItem("fcemcInventory_scanning", true);
     cordova.plugins.barcodeScanner.scan(
       function (result) {
@@ -143,8 +147,9 @@ function scan() {
           //      "Format: " + result.format + "\n" +
           //      "Cancelled: " + result.cancelled);
 
-          $("#scanText").text("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
-
+          //$("#scanText").text("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+                    
+          getMember(result.text);
           localStorage.setItem("fcemcInventory_scanning", false);
       },
       function (error) {
@@ -162,6 +167,39 @@ function scan() {
    );
 }
 
+function getMember(mbrsep) {    
+    var paramItems = "MBRSEP|" + mbrsep;
+        $.ajax({
+            type: "GET",
+            url: "http://gis.fourcty.org/FCEMCrest/FCEMCDataService.svc/MEMBERLIST/" + paramItems,
+            contentType: "application/json; charset=utf-8",
+            cache: false,
+            beforeSend: function () {
+                $("#spinCont").show();
+            },
+            success: function (result) {
+                var results = result.MEMBERLISTResult;
+                
+                var string = "NAME: " + results[0].NAME + "\n" +
+                    "MEMBERNO: " + results[0].MEMBERNO + "\n" +
+                    "MEMBERSEP: " + results[0].MEMBERSEP + "\n" +
+                    "BILLADDR: " + results[0].BILLADDR + "\n" +
+                    "SERVADDR: " + results[0].SERVADDR + "\n" +
+                    "PHONE: " + results[0].PHONE + "\n" +
+                     "MAPNUMBER: " + results[0].MAPNUMBER;
+
+                $("#scanText").text(string);
+                $("#spinCont").hide();
+            },
+            complete: function () {
+                $("#spinCont").hide();
+            },
+            error: function (textStatus, errorThrown) {
+                var txt = textStatus;
+                var et = errorThrown;
+            }
+        });    
+}
 
 function getSpinner() {
     var opts = {
