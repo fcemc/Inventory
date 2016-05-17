@@ -50,10 +50,10 @@ function onDeviceReady() {
 }
 
 function onResume() {
-    if (new Date(localStorage.fcemcOMS_timeout) > new Date()) {
-        getOutages();
-    }
-    else {
-        location.reload();
-    }
+    //if (new Date(localStorage.fcemcOMS_timeout) > new Date()) {
+    //    getOutages();
+    //}
+    //else {
+    //    location.reload();
+    //}
 }
