@@ -1,6 +1,8 @@
 ﻿var tryingToReconnect = false, user;
 
 $(document).ready(function () {
+    $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
         $("body").css("background-color", "black");
@@ -139,7 +141,7 @@ function scan() {
           alert("Scanning failed: " + error);
       },
       {
-          "preferFrontCamera": true, // iOS and Android
+          "preferFrontCamera": false, // iOS and Android
           "showFlipCameraButton": true, // iOS and Android
           "prompt": "Place a barcode inside the scan area", // supported on Android only
           "formats": "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
