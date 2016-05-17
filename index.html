@@ -24,21 +24,6 @@
         <div id="spinwheel"></div>
     </div>
 
-    <div class="pg" data-role="page" data-dialog="true" id="pageLogin">
-        <div id="popupLoginWindow" style="padding:10px 20px;">
-            <h3>Please sign in</h3>
-            <label for="un" class="ui-hidden-accessible">Username:</label>
-            <input type="text" name="user" id="un" value="" placeholder="username">
-            <label for="pw" class="ui-hidden-accessible">Password:</label>
-            <input type="password" name="pass" id="pw" value="" placeholder="password">
-            <a href="" onclick="checkLogin();" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Submit</a>
-            <label class="redbull" id="loginError"></label>
-        </div>
-        <div style="text-align:center">
-            <label id="err"></label>
-        </div>
-    </div>
-
     <div class="pg" data-role="page" id="page1">
         <div class="hdr" data-role="header">
             <h1>FCEMC-Inventory</h1>
@@ -63,6 +48,22 @@
 
 
     </div>
+
+    <div class="pg" data-role="page" data-dialog="true" id="pageLogin">
+        <div id="popupLoginWindow" style="padding:10px 20px;">
+            <h3>Please sign in</h3>
+            <label for="un" class="ui-hidden-accessible">Username:</label>
+            <input type="text" name="user" id="un" value="" placeholder="username">
+            <label for="pw" class="ui-hidden-accessible">Password:</label>
+            <input type="password" name="pass" id="pw" value="" placeholder="password">
+            <a href="" onclick="checkLogin();" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Submit</a>
+            <label class="redbull" id="loginError"></label>
+        </div>
+        <div style="text-align:center">
+            <label id="err"></label>
+        </div>
+    </div>
+
 
     <!--<div class="pg" data-role="page" id="page2">
         <div data-role="header">
