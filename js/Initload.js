@@ -1,7 +1,7 @@
-﻿var tryingToReconnect = false, user, notScanning = true;
+﻿var tryingToReconnect = false, user;
 
 $(document).ready(function () {
-    if (notScanning) {
+    if (localStorage.fcemcInventory_scanning == false) {
         $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
     }
 
@@ -60,7 +60,7 @@ function checkLogin() {
             if (results.authenticateYouSirResult) {
                 $("#loginError").text("");
 
-                $.mobile.pageContainer.pagecontainer("change", "#page1");
+                $.mobile.pageContainer.pagecontainer("change", "#page1");                
 
                 //$("#spinCont").show();
 
@@ -132,7 +132,7 @@ function initLoad() {
 }
 
 function scan() {
-    notScanning = false;
+    localStorage.setItem("fcemcInventory_scanning", true);
     cordova.plugins.barcodeScanner.scan(
       function (result) {
           //alert("We got a barcode\n" +
@@ -142,12 +142,12 @@ function scan() {
 
           $("#scanText").html("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
 
-          notScanning = true;
+          localStorage.setItem("fcemcInventory_scanning", false);
       },
       function (error) {
           //alert("Scanning failed: " + error);
           $("#scanText").html("Scanning failed: " + error);
-          notScanning = true;
+          localStorage.setItem("fcemcInventory_scanning", false);
       },
       {
           "preferFrontCamera": false, // iOS and Android
