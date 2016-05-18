@@ -1,7 +1,10 @@
 ﻿var tryingToReconnect = false, user;
 
 $(document).ready(function () {
-    if (localStorage.fcemcInventory_scanning == undefined || localStorage.fcemcInventory_scanning == false) {
+    if (localStorage.fcemcInventory_scanning == undefined) {
+        $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+    }
+    else if (localStorage.fcemcInventory_scanning ==  false) {
         $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
     }
     else {
@@ -136,9 +139,6 @@ function initLoad() {
 
 function scan() {
 
-    //getMember("71547");
-
-
     localStorage.setItem("fcemcInventory_scanning", true);
     cordova.plugins.barcodeScanner.scan(
       function (result) {
@@ -147,13 +147,11 @@ function scan() {
           //      "Format: " + result.format + "\n" +
           //      "Cancelled: " + result.cancelled);
 
-          //$("#scanText").text("We got a barcode\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
                     
           getMember(result.text);
           localStorage.setItem("fcemcInventory_scanning", false);
       },
-      function (error) {
-          //alert("Scanning failed: " + error);
+      function (error) {          
           $("#scanText").text("Scanning failed: " + error);
           localStorage.setItem("fcemcInventory_scanning", false);
       },
@@ -162,7 +160,7 @@ function scan() {
           "showFlipCameraButton": true, // iOS and Android
           "prompt": "Place a barcode inside the scan area", // supported on Android only
           //"formats": "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-          "orientation": "landscape" // Android only (portrait|landscape), default unset so it rotates with the device
+          "orientation": "portrait" // Android only (portrait|landscape), default unset so it rotates with the device
       }
    );
 }
