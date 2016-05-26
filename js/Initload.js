@@ -8,7 +8,8 @@ $(document).ready(function () {
         $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
     }
     else {
-        $.mobile.pageContainer.pagecontainer("change", "#page1");
+        checkLogin();
+        //$.mobile.pageContainer.pagecontainer("change", "#page1");
     }
 
     //adjust for status bar in iOS
@@ -111,7 +112,7 @@ function setCookie(u, p, t) {
 
 function getCookie() {
     var isCookies = false;
-    if (localStorage.fcemcInventory_uname != null && localStorage.fcemcInventory_pass != null) {
+    if (localStorage.fcemcInventory_uname != null && localStorage.fcemcInventory_pass != null && localStorage.fcemcInventory_uname != "" && localStorage.fcemcInventory_pass != "") {
         isCookies = true;
     }
     return isCookies;
