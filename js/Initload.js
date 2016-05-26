@@ -4,12 +4,11 @@ $(document).ready(function () {
     if (localStorage.fcemcInventory_scanning == undefined) {
         $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
     }
-    else if (localStorage.fcemcInventory_scanning ==  false) {
+    else if (localStorage.fcemcInventory_scanning == "false") {
         $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
     }
     else {
-        checkLogin();
-        //$.mobile.pageContainer.pagecontainer("change", "#page1");
+        $.mobile.pageContainer.pagecontainer("change", "#page1");
     }
 
     //adjust for status bar in iOS
