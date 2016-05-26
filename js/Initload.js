@@ -181,6 +181,7 @@ function getMember(mbrsep) {
             contentType: "application/json; charset=utf-8",
             cache: false,
             beforeSend: function () {
+                $("#scanText").text("");
                 $("#spinCont").show();
             },
             success: function (result) {
