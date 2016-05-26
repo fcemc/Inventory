@@ -138,7 +138,6 @@ function initLoad() {
 }
 
 function scan() {
-
     localStorage.setItem("fcemcInventory_scanning", true);
     cordova.plugins.barcodeScanner.scan(
       function (result) {
