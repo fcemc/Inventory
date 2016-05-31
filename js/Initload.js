@@ -1,6 +1,6 @@
 ﻿var tryingToReconnect = false, user;
 
-$(document).ready(function () {    
+$(document).ready(function () {
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
         $("body").css("background-color", "black");
@@ -56,7 +56,7 @@ function checkLogin() {
             if (results.authenticateYouSirResult) {
                 $("#loginError").text("");
 
-                $.mobile.pageContainer.pagecontainer("change", "#page1");                
+                $.mobile.pageContainer.pagecontainer("change", "#page1");
 
 
                 //if (localStorage.fcemcInventory_scanning == undefined) {
@@ -105,12 +105,12 @@ function setCookie(u, p, t) {
     d.setHours(6);
     d.setMinutes(00);
     d.setSeconds(00);
-    localStorage.setItem("fcemcInventory_timeout", d);    
+    localStorage.setItem("fcemcInventory_timeout", d);
 }
 
 function getCookie() {
     var isCookies = false;
-    if (localStorage.fcemcInventory_uname != null && localStorage.fcemcInventory_pass != null && localStorage.fcemcInventory_uname != "" && localStorage.fcemcInventory_pass != "") {
+    if (localStorage.fcemcInventory_uname != null && localStorage.fcemcInventory_pass != null && localStorage.fcemcInventory_uname != "" && localStorage.fcemcInventory_pass != "" && new Date(localStorage.fcemcInventory_timeout) > new Date()) {
         isCookies = true;
     }
     return isCookies;
@@ -120,17 +120,9 @@ function checkCookie() {
     if (localStorage.fcemcInventory_scanning != "true") {
         var valid = getCookie();
         if (valid == true) {
-            if (new Date(localStorage.fcemcInventory_timeout) > new Date()) {
-                $("#un").val(localStorage.fcemcInventory_uname);
-                $("#pw").val(localStorage.fcemcInventory_pass);
-                $.mobile.pageContainer.pagecontainer("change", "#page1");
-            }
-            else {
-                //localStorage.clear();
-                localStorage.setItem("fcemcInventory_uname", "");
-                localStorage.setItem("fcemcInventory_pass", "");
-                $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
-            }
+            $("#un").val(localStorage.fcemcInventory_uname);
+            $("#pw").val(localStorage.fcemcInventory_pass);
+            $.mobile.pageContainer.pagecontainer("change", "#page1");
         }
         else {
             localStorage.setItem("fcemcInventory_uname", "");
@@ -142,21 +134,17 @@ function checkCookie() {
         $.mobile.pageContainer.pagecontainer("change", "#page1");
     }
 }
-//endregionphon
-
-function initLoad() {
-    //$("#spinCont").show();
-}
+//endregion
 
 function scan() {
-    try{
+    try {
         localStorage.setItem("fcemcInventory_scanning", true);
         cordova.plugins.barcodeScanner.scan(
           function (result) {
               getMember(result.text);
               localStorage.setItem("fcemcInventory_scanning", false);
           },
-          function (error) {          
+          function (error) {
               $("#scanText").text("Scanning failed: " + error);
               localStorage.setItem("fcemcInventory_scanning", false);
           },
@@ -174,45 +162,45 @@ function scan() {
     }
 }
 
-function getMember(mbrsep) {    
+function getMember(mbrsep) {
     var paramItems = "MBRSEP|" + mbrsep;
-        $.ajax({
-            type: "GET",
-            url: "http://gis.fourcty.org/FCEMCrest/FCEMCDataService.svc/MEMBERLIST/" + paramItems,
-            contentType: "application/json; charset=utf-8",
-            cache: false,
-            beforeSend: function () {
-                $("#scanText").text("");
-                $("#spinCont").show();
-            },
-            success: function (result) {
+    $.ajax({
+        type: "GET",
+        url: "http://gis.fourcty.org/FCEMCrest/FCEMCDataService.svc/MEMBERLIST/" + paramItems,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        beforeSend: function () {
+            $("#scanText").text("");
+            $("#spinCont").show();
+        },
+        success: function (result) {
 
-                var results = result.MEMBERLISTResult;
-                var string = "";
+            var results = result.MEMBERLISTResult;
+            var string = "";
 
-                if (results.length > 0) {                    
-                    string = "NAME: " + results[0].NAME + "\n" +
-                        "MEMBERNO: " + results[0].MEMBERNO + "\n" +
-                        "MEMBERSEP: " + results[0].MEMBERSEP + "\n" +
-                        "BILLADDR: " + results[0].BILLADDR + "\n" +
-                        "SERVADDR: " + results[0].SERVADDR + "\n" +
-                        "PHONE: " + results[0].PHONE + "\n" +
-                         "MAPNUMBER: " + results[0].MAPNUMBER;
-                }
-                else {
-                    string = mbrsep;
-                }
-                $("#scanText").text(string);
-                $("#spinCont").hide();
-            },
-            complete: function () {
-                $("#spinCont").hide();
-            },
-            error: function (textStatus, errorThrown) {
-                var txt = textStatus;
-                var et = errorThrown;
+            if (results.length > 0) {
+                string = "NAME: " + results[0].NAME + "\n" +
+                    "MEMBERNO: " + results[0].MEMBERNO + "\n" +
+                    "MEMBERSEP: " + results[0].MEMBERSEP + "\n" +
+                    "BILLADDR: " + results[0].BILLADDR + "\n" +
+                    "SERVADDR: " + results[0].SERVADDR + "\n" +
+                    "PHONE: " + results[0].PHONE + "\n" +
+                     "MAPNUMBER: " + results[0].MAPNUMBER;
             }
-        });    
+            else {
+                string = mbrsep;
+            }
+            $("#scanText").text(string);
+            $("#spinCont").hide();
+        },
+        complete: function () {
+            $("#spinCont").hide();
+        },
+        error: function (textStatus, errorThrown) {
+            var txt = textStatus;
+            var et = errorThrown;
+        }
+    });
 }
 
 function getSpinner() {
