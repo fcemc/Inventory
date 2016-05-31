@@ -3,18 +3,12 @@
 $(document).ready(function () {
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
-        //$("body").css("background-color", "black");
-        //$("div[role='dialog']").css("background-color", "#efecec");
-        //$(".pg").css({ "margin-top": "20px" });
-        $("#thePage").css({ "margin-top": "20px" });
+        $("body").css("background-color", "black");
+        $("div[role='dialog']").css("background-color", "#efecec");
+        $(".pg").css({ "margin-top": "20px" });
     }
 
     if (navigator.onLine) {
-        $("#pageLogin").popup({
-            dismissible: false
-        });
-        //$("#pageLogin").popup("close");
-
         checkCookie();
         getSpinner();
         $("#spinCont").hide();
@@ -43,8 +37,7 @@ $(document).ready(function () {
             window.location.reload();
         }
         else {
-            //$.mobile.pageContainer.pagecontainer("change", "#pageLogin");
-            $("#pageLogin").popup("open");
+            $.mobile.pageContainer.pagecontainer("change", "#page2");
         }
     }
 });
@@ -61,10 +54,8 @@ function checkLogin() {
         cache: false,
         success: function (results) {
             if (results.authenticateYouSirResult) {
-                $("#pageLogin").popup("close");
                 $("#loginError").text("");
-
-                //$.mobile.pageContainer.pagecontainer("change", "#page1");
+                
                 if (localStorage.fcemcInventory_uname == undefined || localStorage.fcemcInventory_uname == "") {
                     setCookie(user, _pw, 1); //expires 1 day from inital login
                 }
@@ -114,14 +105,12 @@ function checkCookie() {
         var valid = getCookie();
         if (valid == true) {
             $("#un").val(localStorage.fcemcInventory_uname);
-            $("#pw").val(localStorage.fcemcInventory_pass);
-            //$(":mobile-pagecontainer").pagecontainer("change", "#page1");
+            $("#pw").val(localStorage.fcemcInventory_pass);            
         }
         else {
             localStorage.setItem("fcemcInventory_uname", "");
             localStorage.setItem("fcemcInventory_pass", "");
-            //$(":mobile-pagecontainer").pagecontainer("change", "#pageLogin");
-            $("#pageLogin").popup("open");
+            $(":mobile-pagecontainer").pagecontainer("change", "#page2");
         }
     }
 }
@@ -228,7 +217,7 @@ function networkIssue(button) {
         window.location.reload();
     }
     else if (button == 1) {
-        $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+        $.mobile.pageContainer.pagecontainer("change", "#page1");
     }
 }
 
