@@ -139,6 +139,11 @@ function checkCookie() {
             localStorage.setItem("fcemcInventory_pass", "");
         }
     }
+    else {
+        localStorage.setItem("fcemcInventory_uname", "");
+        localStorage.setItem("fcemcInventory_pass", "");
+        $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+    }
 }
 //endregionphon
 
@@ -151,12 +156,6 @@ function scan() {
         localStorage.setItem("fcemcInventory_scanning", true);
         cordova.plugins.barcodeScanner.scan(
           function (result) {
-              //alert("We got a barcode\n" +
-              //      "Result: " + result.text + "\n" +
-              //      "Format: " + result.format + "\n" +
-              //      "Cancelled: " + result.cancelled);
-
-                    
               getMember(result.text);
               localStorage.setItem("fcemcInventory_scanning", false);
           },
