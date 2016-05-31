@@ -2,18 +2,19 @@
 
 $(document).ready(function () {
     //adjust for status bar in iOS
-    $("#pageLogin").popup({
-        dismissible: false
-    });
-    $("#pageLogin").popup("close");
-
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
-        $("body").css("background-color", "black");
+        //$("body").css("background-color", "black");
         //$("div[role='dialog']").css("background-color", "#efecec");
-        $(".pg").css({ "margin-top": "20px" });
+        //$(".pg").css({ "margin-top": "20px" });
+        $("#thePage").css({ "margin-top": "20px" });
     }
 
     if (navigator.onLine) {
+        $("#pageLogin").popup({
+            dismissible: false
+        });
+        //$("#pageLogin").popup("close");
+
         checkCookie();
         getSpinner();
         $("#spinCont").hide();
