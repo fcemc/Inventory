@@ -123,9 +123,9 @@ function scan() {
         cordova.plugins.barcodeScanner.scan(
           function (result) {
               if (result.cancelled != 1) {
-                  getMember(result.text);
-                  localStorage.setItem("fcemcInventory_scanning", false);
-              }
+                  getMember(result.text);                  
+              }              
+              localStorage.setItem("fcemcInventory_scanning", false);
           },
           function (error) {
               $("#scanText").text("Scanning failed: " + error);
@@ -153,7 +153,7 @@ function getMember(mbrsep) {
         contentType: "application/json; charset=utf-8",
         cache: false,
         beforeSend: function () {
-            $("#scanText").text("");
+            //$("#scanText").text("");
             $("#spinCont").show();
         },
         success: function (result) {
