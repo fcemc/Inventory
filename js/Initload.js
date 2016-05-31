@@ -2,9 +2,14 @@
 
 $(document).ready(function () {
     //adjust for status bar in iOS
+    $("#pageLogin").popup({
+        dismissible: false
+    });
+    $("#pageLogin").popup("open");
+
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
         $("body").css("background-color", "black");
-        $("div[role='dialog']").css("background-color", "#efecec");
+        //$("div[role='dialog']").css("background-color", "#efecec");
         $(".pg").css({ "margin-top": "20px" });
     }
 
@@ -37,7 +42,8 @@ $(document).ready(function () {
             window.location.reload();
         }
         else {
-            $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+            //$.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+            $("#pageLogin").popup("open");
         }
     }
 });
@@ -54,9 +60,10 @@ function checkLogin() {
         cache: false,
         success: function (results) {
             if (results.authenticateYouSirResult) {
+                $("#pageLogin").popup("close");
                 $("#loginError").text("");
 
-                $.mobile.pageContainer.pagecontainer("change", "#page1");
+                //$.mobile.pageContainer.pagecontainer("change", "#page1");
                 if (localStorage.fcemcInventory_uname == undefined || localStorage.fcemcInventory_uname == "") {
                     setCookie(user, _pw, 1); //expires 1 day from inital login
                 }
@@ -107,26 +114,20 @@ function checkCookie() {
         if (valid == true) {
             $("#un").val(localStorage.fcemcInventory_uname);
             $("#pw").val(localStorage.fcemcInventory_pass);
-            $(":mobile-pagecontainer").pagecontainer("change", "#page1");
+            //$(":mobile-pagecontainer").pagecontainer("change", "#page1");
         }
         else {
             localStorage.setItem("fcemcInventory_uname", "");
             localStorage.setItem("fcemcInventory_pass", "");
-            $(":mobile-pagecontainer").pagecontainer("change", "#pageLogin");
+            //$(":mobile-pagecontainer").pagecontainer("change", "#pageLogin");
+            $("#pageLogin").popup("open");
         }
-    }
-    else {
-        $(":mobile-pagecontainer").pagecontainer("change", "#page1");
     }
 }
 //endregion
 
 function scan() {
     try {
-        //$.mobile.pageContainer.pagecontainer("change", "#page1");
-        $(":mobile-pagecontainer").pagecontainer("change", "#page1");
-
-
         localStorage.setItem("fcemcInventory_scanning", true);
         cordova.plugins.barcodeScanner.scan(
           function (result) {
@@ -219,10 +220,6 @@ function getSpinner() {
     }
     var target = document.getElementById('spinwheel');
     spinner = new Spinner(opts).spin(target);
-}
-
-function quit() {
-    $(":mobile-pagecontainer").pagecontainer("change", "#page1");
 }
 
 function networkIssue(button) {
