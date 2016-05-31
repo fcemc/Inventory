@@ -123,6 +123,7 @@ function checkCookie() {
 
 function scan() {
     try {
+        $.mobile.pageContainer.pagecontainer("change", "#page1");
         localStorage.setItem("fcemcInventory_scanning", true);
         cordova.plugins.barcodeScanner.scan(
           function (result) {
