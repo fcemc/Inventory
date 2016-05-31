@@ -57,24 +57,9 @@ function checkLogin() {
                 $("#loginError").text("");
 
                 $.mobile.pageContainer.pagecontainer("change", "#page1");
-
-
-                //if (localStorage.fcemcInventory_scanning == undefined) {
-                //    $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
-                //}
-                //else if (localStorage.fcemcInventory_scanning == "false") {
-                //    $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
-                //}
-                //else {
-                //    $.mobile.pageContainer.pagecontainer("change", "#page1");
-                //}
-
                 if (localStorage.fcemcInventory_uname == undefined || localStorage.fcemcInventory_uname == "") {
                     setCookie(user, _pw, 1); //expires 1 day from inital login
                 }
-
-                initLoad();
-
             }
             else {
                 //window.localStorage.clear();
