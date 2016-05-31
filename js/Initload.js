@@ -4,7 +4,7 @@ $(document).ready(function () {
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
         $("body").css("background-color", "black");
-        $("div[role='dialog']").css("background-color", "#efecec");
+        //$("div[role='dialog']").css("background-color", "#efecec");
         $(".pg").css({ "margin-top": "20px" });
     }
 
@@ -55,7 +55,8 @@ function checkLogin() {
         success: function (results) {
             if (results.authenticateYouSirResult) {
                 $("#loginError").text("");
-                
+                $.mobile.pageContainer.pagecontainer("change", "#page1");
+
                 if (localStorage.fcemcInventory_uname == undefined || localStorage.fcemcInventory_uname == "") {
                     setCookie(user, _pw, 1); //expires 1 day from inital login
                 }
