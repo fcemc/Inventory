@@ -1,16 +1,6 @@
 ﻿var tryingToReconnect = false, user;
 
-$(document).ready(function () {
-    //if (localStorage.fcemcInventory_scanning == undefined) {
-    //    $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
-    //}
-    //else if (localStorage.fcemcInventory_scanning == "false") {
-    //    $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
-    //}
-    //else {
-    //    $.mobile.pageContainer.pagecontainer("change", "#page1");
-    //}
-
+$(document).ready(function () {    
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
         $("body").css("background-color", "black");
@@ -127,22 +117,29 @@ function getCookie() {
 }
 
 function checkCookie() {
-    var valid = getCookie();
-    if (valid == true) {
-        if (new Date(localStorage.fcemcInventory_timeout) > new Date()) {
-            $("#un").val(localStorage.fcemcInventory_uname);
-            $("#pw").val(localStorage.fcemcInventory_pass);
+    if (localStorage.fcemcInventory_scanning != "true") {
+        var valid = getCookie();
+        if (valid == true) {
+            if (new Date(localStorage.fcemcInventory_timeout) > new Date()) {
+                $("#un").val(localStorage.fcemcInventory_uname);
+                $("#pw").val(localStorage.fcemcInventory_pass);
+                $.mobile.pageContainer.pagecontainer("change", "#page1");
+            }
+            else {
+                //localStorage.clear();
+                localStorage.setItem("fcemcInventory_uname", "");
+                localStorage.setItem("fcemcInventory_pass", "");
+                $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+            }
         }
         else {
-            //localStorage.clear();
             localStorage.setItem("fcemcInventory_uname", "");
             localStorage.setItem("fcemcInventory_pass", "");
+            $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
         }
     }
     else {
-        localStorage.setItem("fcemcInventory_uname", "");
-        localStorage.setItem("fcemcInventory_pass", "");
-        $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+        $.mobile.pageContainer.pagecontainer("change", "#page1");
     }
 }
 //endregionphon
