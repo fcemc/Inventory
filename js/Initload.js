@@ -107,28 +107,33 @@ function checkCookie() {
         if (valid == true) {
             $("#un").val(localStorage.fcemcInventory_uname);
             $("#pw").val(localStorage.fcemcInventory_pass);
-            $.mobile.pageContainer.pagecontainer("change", "#page1");
+            $(":mobile-pagecontainer").pagecontainer("change", "#page1");
         }
         else {
             localStorage.setItem("fcemcInventory_uname", "");
             localStorage.setItem("fcemcInventory_pass", "");
-            $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
+            $(":mobile-pagecontainer").pagecontainer("change", "#pageLogin");
         }
     }
     else {
-        $.mobile.pageContainer.pagecontainer("change", "#page1");
+        $(":mobile-pagecontainer").pagecontainer("change", "#page1");
     }
 }
 //endregion
 
 function scan() {
     try {
-        $.mobile.pageContainer.pagecontainer("change", "#page1");
+        //$.mobile.pageContainer.pagecontainer("change", "#page1");
+        $(":mobile-pagecontainer").pagecontainer("change", "#page1");
+
+
         localStorage.setItem("fcemcInventory_scanning", true);
         cordova.plugins.barcodeScanner.scan(
           function (result) {
-              getMember(result.text);
-              localStorage.setItem("fcemcInventory_scanning", false);
+              if (result.cancelled != 1) {
+                  getMember(result.text);
+                  localStorage.setItem("fcemcInventory_scanning", false);
+              }
           },
           function (error) {
               $("#scanText").text("Scanning failed: " + error);
@@ -217,7 +222,7 @@ function getSpinner() {
 }
 
 function quit() {
-    $.mobile.pageContainer.pagecontainer("change", "#page1");
+    $(":mobile-pagecontainer").pagecontainer("change", "#page1");
 }
 
 function networkIssue(button) {
