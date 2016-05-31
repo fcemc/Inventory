@@ -24,31 +24,6 @@
         <div id="spinwheel"></div>
     </div>
 
-    <div class="pg" data-role="page" id="page1">
-        <div class="hdr" data-role="header">
-            <h1>FCEMC-Inventory</h1>
-        </div>
-        <div role="main" class="ui-content">
-            <div style="text-align:center;">
-                <!--<div id="outage"></div>
-                <div id="scadaoutage"></div>-->
-                <a href="#" onclick="scan();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Scan</a>
-                <label style="color:black" id="scanText"></label>
-            </div>
-        </div>
-
-        <!--<div style="text-align:center; background-color: gainsboro;" data-role="popup" id="popup" class="ui-content" data-dismissible="false">
-            <label id="noteLbl">Enter the notes for the outage</label>
-            <div>
-                <textarea name="textArea" id="noteNotes" cols="50" rows="3" maxlength="100"></textarea>
-            </div>
-            <label style="font-size:small;" id="lettersLeft"></label>
-            <a href="#" style="background-color:red;" onclick="closeNote();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-c" data-rel="back">Cancel</a>
-            <a href="#" onclick="addNote();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Submit</a>
-        </div>-->
-
-    </div>
-
     <div class="pg" data-role="page" data-dialog="true" id="pageLogin">
         <div id="popupLoginWindow" style="padding:10px 20px;">
             <h3>Please sign in</h3>
@@ -64,85 +39,18 @@
         </div>
     </div>
 
-
-    <!--<div class="pg" data-role="page" id="page2">
-        <div data-role="header">
-            <h1>Confirm Outage</h1>
+    <div class="pg" data-role="page" id="page1">
+        <div class="hdr" data-role="header">
+            <h1>FCEMC-Inventory</h1>
         </div>
-        <div role="main" class="ui-content" style="text-align:center;">
-            <div data-role="tabs" id="tabs" class="ui-corner-all">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a id="tab-one" href="#one" data-ajax=" false">Current Device</a></li>
-                        <li><a id="tab-two" href="#two" data-ajax="false">Upsteam Device</a></li>
-                    </ul>
-                </div>
-                <div id="one" class="ui-body-d ui-content" style="background-color:white; color:black;">
-                    <div>Confirm outage on device: <label id="confrimLbl"></label></div>
-                </div>
-                <div id="two" class="ui-body-d ui-content" style="background-color:white; color:black;">
-                    <label for="select-upstream">Confirm outage on upstream device</label>
-                    <select name="select-upstream" id="select-upstream"></select>
-                    <label for="select-phase">Select outage phase for device</label>
-                    <select name="select-phase" id="select-phase">
-                        <option value="A">A Phase</option>
-                        <option value="B">B Phase</option>
-                        <option value="C">C Phase</option>
-                        <option value="AB">AB Phase</option>
-                        <option value="AC">AC Phase</option>
-                        <option value="BC">BC Phase</option>
-                        <option value="ABC">ABC Phase</option>
-                    </select>
-                </div>
+        <div role="main" class="ui-content">
+            <div style="text-align:center;">
+                <a href="#" onclick="scan();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Scan</a>
+                <label style="color:black" id="scanText"></label>
             </div>
-
-            <button style="background-color:red;" onclick="quit();" class="ui-btn ui-corner-all">Cancel</button>
-            <button style="background-color:black;" onclick="confirmOutage();" class="ui-btn ui-corner-all">Confirm Outage</button>
         </div>
     </div>
 
-    <div class="pg" data-role="page" id="page3">
-        <div data-role="header">
-            <h1>Restore Outage</h1>
-        </div>
-        <div role="main" class="ui-content" style="color:black;">
-            Restore outgae on device: <label id="restoreLbl"></label>
-            <div class="ui-field-contain">
-                <div>
-                    <label for="select-cause">Outage Cause:</label>
-                </div>
-                <div>
-                    <select name="select-cause" id="select-cause"></select>
-                </div>
-            </div>
-            <div class="ui-field-contain">
-                <div>
-                    <label for="select-weather">Weather Condition:</label>
-                </div>
-                <div>
-                    <select name="select-weather" id="select-weather"></select>
-                </div>
-            </div>
-            <div class="ui-field-contain">
-                <div>
-                    <label for="select-equipment">Equipment Failure:</label>
-                </div>
-                <div>
-                    <select name="select-equipment" id="select-equipment"></select>
-                </div>
-            </div>
-            <div class="ui-field-contain">
-                <div>
-                    <label for="select-other">Event:</label>
-                </div>
-                <div>
-                    <select name="select-other" id="select-other"></select>
-                </div>
-            </div>
-            <button style="background-color:red;" onclick="quit();" class="ui-btn ui-corner-all">Cancel</button>
-            <button style="background-color:black;" onclick="restoreOutage();" class="ui-btn ui-corner-all">Close Outage</button>
-        </div>
-    </div>-->
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
