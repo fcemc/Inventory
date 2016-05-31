@@ -4,7 +4,7 @@ $(document).ready(function () {
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
         $("body").css("background-color", "black");
-        //$("div[role='dialog']").css("background-color", "#efecec");
+        $("div[role='dialog']").css("background-color", "#efecec");
         $(".pg").css({ "margin-top": "20px" });
     }
 
@@ -37,7 +37,7 @@ $(document).ready(function () {
             window.location.reload();
         }
         else {
-            $.mobile.pageContainer.pagecontainer("change", "#page2");
+            $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
         }
     }
 });
@@ -55,8 +55,8 @@ function checkLogin() {
         success: function (results) {
             if (results.authenticateYouSirResult) {
                 $("#loginError").text("");
-                $.mobile.pageContainer.pagecontainer("change", "#page1");
 
+                $.mobile.pageContainer.pagecontainer("change", "#page1");
                 if (localStorage.fcemcInventory_uname == undefined || localStorage.fcemcInventory_uname == "") {
                     setCookie(user, _pw, 1); //expires 1 day from inital login
                 }
@@ -106,26 +106,34 @@ function checkCookie() {
         var valid = getCookie();
         if (valid == true) {
             $("#un").val(localStorage.fcemcInventory_uname);
-            $("#pw").val(localStorage.fcemcInventory_pass);            
+            $("#pw").val(localStorage.fcemcInventory_pass);
+            $(":mobile-pagecontainer").pagecontainer("change", "#page1");
         }
         else {
             localStorage.setItem("fcemcInventory_uname", "");
             localStorage.setItem("fcemcInventory_pass", "");
-            $(":mobile-pagecontainer").pagecontainer("change", "#page2");
+            $(":mobile-pagecontainer").pagecontainer("change", "#pageLogin");
         }
+    }
+    else {
+        $(":mobile-pagecontainer").pagecontainer("change", "#page1");
     }
 }
 //endregion
 
 function scan() {
     try {
+        //$.mobile.pageContainer.pagecontainer("change", "#page1");
+        $(":mobile-pagecontainer").pagecontainer("change", "#page1");
+
+
         localStorage.setItem("fcemcInventory_scanning", true);
         cordova.plugins.barcodeScanner.scan(
           function (result) {
               if (result.cancelled != 1) {
-                  getMember(result.text);                  
+                  getMember(result.text);
+                  localStorage.setItem("fcemcInventory_scanning", false);
               }
-              localStorage.setItem("fcemcInventory_scanning", false);
           },
           function (error) {
               $("#scanText").text("Scanning failed: " + error);
@@ -213,12 +221,16 @@ function getSpinner() {
     spinner = new Spinner(opts).spin(target);
 }
 
+function quit() {
+    $(":mobile-pagecontainer").pagecontainer("change", "#page1");
+}
+
 function networkIssue(button) {
     if (button == 2) {
         window.location.reload();
     }
     else if (button == 1) {
-        $.mobile.pageContainer.pagecontainer("change", "#page1");
+        $.mobile.pageContainer.pagecontainer("change", "#pageLogin");
     }
 }
 
