@@ -3,8 +3,7 @@
 $(document).ready(function () {
     //adjust for status bar in iOS
     if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
-        $("body").css("background-color", "black");
-        $("div[role='dialog']").css("background-color", "#efecec");
+        $("body").css("background-color", "black");        
         $(".pg").css({ "margin-top": "20px" });
     }
 
