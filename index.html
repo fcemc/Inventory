@@ -24,7 +24,7 @@
         <div id="spinwheel"></div>
     </div>
 
-    <div class="pg" data-role="page" data-dialog="true" id="pageLogin">
+    <!--<div class="pg" data-role="page" data-dialog="true" id="pageLogin">
         <div id="popupLoginWindow" style="padding:10px 20px;">
             <h3>Please sign in</h3>
             <label for="un" class="ui-hidden-accessible">Username:</label>
@@ -37,6 +37,23 @@
         <div style="text-align:center">
             <label id="err"></label>
         </div>
+    </div>-->
+
+    <div data-role="popup" id="pageLogin" class="ui-corner-all">
+        <form>
+            <div style="padding:10px 20px;">
+                <h3>Please sign in</h3>
+                <label for="un" class="ui-hidden-accessible">Username:</label>
+                <input type="text" name="user" id="un" value="" placeholder="username">
+                <label for="pw" class="ui-hidden-accessible">Password:</label>
+                <input type="password" name="pass" id="pw" value="" placeholder="password">
+                <a href="" onclick="checkLogin();" class="ui-shadow ui-btn ui-corner-all " data-transition="pop">Submit</a>
+                <label class="redbull" id="loginError"></label>
+            </div>
+            <div style="text-align:center">
+                <label id="err"></label>
+            </div>
+        </form>
     </div>
 
     <div class="pg" data-role="page" id="page1">
