@@ -24,20 +24,17 @@
         <div id="spinwheel"></div>
     </div>
 
-    <!--<div class="pg" data-role="page" data-dialog="true" id="pageLogin">
-        <div id="popupLoginWindow" style="padding:10px 20px;">
-            <h3>Please sign in</h3>
-            <label for="un" class="ui-hidden-accessible">Username:</label>
-            <input type="text" name="user" id="un" value="" placeholder="username">
-            <label for="pw" class="ui-hidden-accessible">Password:</label>
-            <input type="password" name="pass" id="pw" value="" placeholder="password">
-            <a href="" onclick="checkLogin();" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Submit</a>
-            <label class="redbull" id="loginError"></label>
+    <div class="pg">
+        <div class="hdr" data-role="header">
+            <h1>FCEMC-Inventory</h1>
         </div>
-        <div style="text-align:center">
-            <label id="err"></label>
+        <div role="main" class="ui-content">
+            <div style="text-align:center;">
+                <a href="#" onclick="scan();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Scan</a>
+                <label style="color:black" id="scanText"></label>
+            </div>
         </div>
-    </div>-->
+    </div>
 
     <div data-role="popup" id="pageLogin" class="ui-corner-all">
         <form>
@@ -55,19 +52,6 @@
             </div>
         </form>
     </div>
-
-    <div>
-        <div class="hdr" data-role="header">
-            <h1>FCEMC-Inventory</h1>
-        </div>
-        <div role="main" class="ui-content">
-            <div style="text-align:center;">
-                <a href="#" onclick="scan();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Scan</a>
-                <label style="color:black" id="scanText"></label>
-            </div>
-        </div>
-    </div>
-
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
