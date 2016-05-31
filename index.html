@@ -30,13 +30,14 @@
         </div>
         <div role="main" class="ui-content">
             <div style="text-align:center;">
-                <a href="#page1" onclick="scan();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Scan</a>
+                <!--<a href="#page1" onclick="scan();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Scan</a>-->
+                <input type="button" value="Scan" onclick="scan();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">
                 <label style="color:black" id="scanText"></label>
             </div>
         </div>
     </div>
 
-    <div class="pg" data-role="page" id="page2">
+    <div class="pg" data-role="page" id="page2" data-dialog="true">
         <div style="padding:10px 20px;">
             <h3>Please sign in</h3>
             <label for="un" class="ui-hidden-accessible">Username:</label>
